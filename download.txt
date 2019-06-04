@@ -1,0 +1,15 @@
+https://github.com/google-research/bert
+
+
+https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H-768_A-12.zip
+
+BERT-Base, Uncased: 12-layer, 768-hidden, 12-heads, 110M parameters
+BERT-Large, Uncased: 24-layer, 1024-hidden, 16-heads, 340M parameters
+BERT-Base, Cased: 12-layer, 768-hidden, 12-heads , 110M parameters
+BERT-Large, Cased: 24-layer, 1024-hidden, 16-heads, 340M parameters
+BERT-Base, Multilingual Cased (New, recommended): 104 languages, 12-layer, 768-hidden, 12-heads, 110M parameters
+BERT-Base, Multilingual Uncased (Orig, not recommended) (Not recommended, use Multilingual Cased instead): 102 languages, 12-layer, 768-hidden, 12-heads, 110M parameters
+BERT-Base, Chinese: Chinese Simplified and Traditional, 12-layer, 768-hidden, 12-heads, 110M parameters
+
+前4个是英文模型，Multilingual 是多语言模型，最后一个是中文模型(只有字级别的)
+其中 Uncased 是字母全部转换成小写，而Cased是保留了大小写。
