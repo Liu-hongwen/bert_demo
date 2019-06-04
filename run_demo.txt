@@ -1,0 +1,91 @@
+export BERT_BASE_DIR=/home/gpu0/LiuHongWen/bert/chinese_L-12_H-768_A-12
+export DATA_DIR=/home/gpu0/LiuHongWen/bert/data
+
+# 训练
+python3 run_squad.py \
+  --vocab_file=$BERT_BASE_DIR/vocab.txt \
+  --bert_config_file=$BERT_BASE_DIR/bert_config.json \
+  --init_checkpoint=$BERT_BASE_DIR/bert_model.ckpt \
+  --do_train=True \
+  --train_file=$DATA_DIR/train-v1.1.json \
+  --do_predict=True \
+  --predict_file=$DATA_DIR/dev-v1.1.json \
+  --train_batch_size=12 \
+  --learning_rate=3e-5 \
+  --num_train_epochs=2.0 \
+  --max_seq_length=128 \
+  --doc_stride=128 \
+  --output_dir=/home/gpu0/LiuHongWen/bert2/model
+  
+在output_dir文件夹下会输出一个predictions.json文件
+
+
+# 评估
+python3 evaluate-v1.1.py ./data/dev-v1.1.json ./model/predictions.json
+
+输出结果：{"exact_match": 59.92431409649953, "f1": 70.1092450056425}
+
+
+
+.
+├── code
+│   └── bert
+│       ├── CONTRIBUTING.md
+│       ├── create_pretraining_data.py
+│       ├── extract_features.py
+│       ├── __init__.py
+│       ├── LICENSE
+│       ├── modeling.py
+│       ├── modeling_test.py
+│       ├── multilingual.md
+│       ├── optimization.py
+│       ├── optimization_test.py
+│       ├── predicting_movie_reviews_with_bert_on_tf_hub.ipynb
+│       ├── __pycache__
+│       │   ├── modeling.cpython-36.pyc
+│       │   ├── optimization.cpython-36.pyc
+│       │   └── tokenization.cpython-36.pyc
+│       ├── README.md
+│       ├── requirements.txt
+│       ├── run_classifier.py
+│       ├── run_classifier_with_tfhub.py
+│       ├── run_pretraining.py
+│       ├── run_squad.py
+│       ├── sample_text.txt
+│       ├── tokenization.py
+│       └── tokenization_test.py
+├── data
+│   ├── dev-v1.1.json
+│   └── train-v1.1.json
+├── evaluate-v1.1.py
+├── model
+│   ├── checkpoint
+│   ├── eval.tf_record
+│   ├── events.out.tfevents.1558431644.istarshine-dp-gpu0
+│   ├── graph.pbtxt
+│   ├── model.ckpt-11000.data-00000-of-00001
+│   ├── model.ckpt-11000.index
+│   ├── model.ckpt-11000.meta
+│   ├── model.ckpt-12000.data-00000-of-00001
+│   ├── model.ckpt-12000.index
+│   ├── model.ckpt-12000.meta
+│   ├── model.ckpt-13000.data-00000-of-00001
+│   ├── model.ckpt-13000.index
+│   ├── model.ckpt-13000.meta
+│   ├── model.ckpt-14000.data-00000-of-00001
+│   ├── model.ckpt-14000.index
+│   ├── model.ckpt-14000.meta
+│   ├── model.ckpt-14599.data-00000-of-00001
+│   ├── model.ckpt-14599.index
+│   ├── model.ckpt-14599.meta
+│   ├── nbest_predictions.json
+│   ├── predictions.json
+│   └── train.tf_record
+└── premodel
+    └── chinese_L-12_H-768_A-12
+        ├── bert_config.json
+        ├── bert_model.ckpt.data-00000-of-00001
+        ├── bert_model.ckpt.index
+        ├── bert_model.ckpt.meta
+        └── vocab.txt
+
